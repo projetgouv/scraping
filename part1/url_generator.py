@@ -8,7 +8,7 @@ class UrlGenerator:
 
 
     def generate_urls(self):
-        for adresse in self.dataframe['GM_search']:
+        for adresse in self.dataframe['search']:
 # setting up the logging object
             logger = logging.getLogger('main')
             logging.basicConfig(
