@@ -67,14 +67,12 @@ Pygments==2.15.1
 pyrsistent==0.19.3
 PySocks==1.7.1
 python-dateutil==2.8.2
-python-dotenv==1.0.0
 python-json-logger==2.0.7
 pytz==2023.3
 pytz-deprecation-shim==0.1.0.post0
 PyYAML==6.0
 pyzmq==25.0.2
 regex==2023.5.5
-requests==2.30.0
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
 selenium==4.9.0
@@ -87,7 +85,6 @@ stack-data==0.6.2
 terminado==0.17.1
 tinycss2==1.2.1
 tornado==6.3.1
-tqdm==4.65.0
 traitlets==5.9.0
 trio==0.22.0
 trio-websocket==0.10.2
