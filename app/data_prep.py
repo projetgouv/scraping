@@ -12,6 +12,7 @@ class DataProcessor:
     
     def clean_date_column(self):
         replacements = {
+            'a day ago': '1 day ago',
             'a year ago': '1 year ago',
             'a month ago': '1 month ago',
             'a week ago': '1 week ago'

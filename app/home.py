@@ -1,50 +1,22 @@
 import streamlit as st
 import pandas as pd
-from data_prep import DataProcessor
-st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
+st.set_page_config(page_title='Utilisation des avis Google des Pôles Emplois', layout='wide')
 
-st.markdown("<h1 style='text-align: center;'>France Echanges</h1>", unsafe_allow_html=True)
+# Titre
+st.markdown("<h1 style='text-align: center;'>Utilisation des avis Google des Pôles Emplois</h1>", unsafe_allow_html=True)
 
-st.write("Bienvenue sur France Echanges, Ensemble, construisons le service public de l'emploi du futur en donnant la parole aux usagers")
-st.write("Nous avons rencontré quelques problèmes techniques, avec des données qui ne se sont pas chargées, vous trouvez ci-dessous une analyse des données qui ont pu être chargées")
+# Introduction
+st.write("Dans la lignée de la Startup Nation, où l'innovation technologique et l'utilisation des données sont au cœur du progrès, nous présentons un projet novateur qui exploite les avis Google des Pôles Emplois pour mieux comprendre les plaintes des utilisateurs. En utilisant des techniques de traitement automatique du langage naturel (NLP), nous analysons les commentaires des utilisateurs afin d'identifier les problèmes récurrents, les lacunes dans les services et les améliorations potentielles.")
 
-data_file = 'all_data/google_reviews_RGPD.csv'
-df_scraped_data = pd.read_csv(data_file)
-columns = ['date', 'rate', 'review_text', 'object_address']
-data_path = data_file
-# Obtenir le nombre de lieux scrappés
-nombre_lieux_scrappes = len(df_scraped_data['object_address'].unique())
+# Objectifs
+st.write("L'objectif principal de ce projet est de permettre une vision proactive des problématiques rencontrées par les utilisateurs des Pôles Emplois. En comprenant les plaintes et les préoccupations des utilisateurs, nous visons à améliorer les services offerts par les Pôles Emplois et à optimiser l'expérience des utilisateurs dans leur recherche d'emploi.")
 
-# Afficher le nombre de lieux scrappés
+# Technologies utilisées
+st.write("Pour mener à bien ce projet, nous utilisons des technologies avancées telles que le traitement automatique du langage naturel (NLP). Cette approche nous permet d'extraire des informations précieuses à partir des avis Google des Pôles Emplois et de les analyser de manière efficace.")
 
-# Charger le fichier CSV contenant les adresses
-addresses_file = 'all_data/pole_emploi.csv'
-df_addresses = pd.read_csv(addresses_file)
-nombre_lieux = len(df_addresses['Adresse'].unique())
-pourcentage_scrappes = round((nombre_lieux_scrappes / nombre_lieux) * 100, 2)
+# Streamlit et respect des PEP
+st.write("Pour présenter ce projet de manière interactive et conviviale, nous utilisons Streamlit, un framework Python respectant les PEP (Python Enhancement Proposals). Streamlit nous permet de développer rapidement une interface utilisateur intuitive pour visualiser les résultats de notre analyse et interagir avec les données.")
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    st.metric(label="Nombre de lieux scrappés", value=nombre_lieux_scrappes)
-with col2:
-    st.metric(label="Nombre de lieux", value=nombre_lieux)
-with col3:
-    st.metric(label="Pourcentage de lieux scrappés", value=pourcentage_scrappes)
-processor = DataProcessor(data_path)
-processor.process_data(columns)
-data = processor.data
-st.dataframe(data)
-nb_reviews = data.groupby('years').agg({'rate': ['count', 'mean']}).reset_index()
-nb_reviews.columns = ['years', 'nombre de reviews', 'note moyenne']
-nb_reviews['note moyenne'] = nb_reviews['note moyenne'].round(1)
-# Créer un graphique avec l'année, le nombre de reviews et la note moyenne
-fig = px.line(nb_reviews, x='years', y='nombre de reviews', text='note moyenne')
-fig.update_traces(
-                  hovertemplate='Année: %{x}<br>Nombre de reviews: %{y}<br>Note moyenne: %{text:.1f}')
-#fig.update_layout(hovermode="x unified")
-fig.update_traces(textposition='top center')
-#fig.update_traces(mode="markers+lines")
-fig.update_layout(xaxis={'type': 'category'})
-fig.update_layout(title={'text': 'Nombre de reviews et note moyenne par année', 'x': 0.5, 'xanchor': 'center'})
+# Conclusion
+st.write("En utilisant les avis Google des Pôles Emplois et en appliquant des techniques avancées de NLP, nous espérons contribuer à l'amélioration continue des services publics de l'emploi en identifiant les domaines à problèmes et en proposant des solutions innovantes.")
 
-st.altair_chart(fig, use_container_width=True)
