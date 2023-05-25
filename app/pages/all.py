@@ -43,42 +43,54 @@ best_year = nb_reviews['years'][nb_reviews['note moyenne'].idxmax()]
 # Année avec la note moyenne la plus basse
 worst_year = nb_reviews['years'][nb_reviews['note moyenne'].idxmin()]
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3,col4= st.columns(4)
 with col1:
     st.metric(label="Nombre de lieux scrappés", value=nombre_lieux_scrappes)
-    st.metric(label="Note moyenne sur toutes les années", value=note_moyenne)
 with col2:
     st.metric(label="Nombre d'avis scrappés", value=nb_reviews['nombre de reviews'].sum())
-    st.metric(label="Année avec la meilleure note moyenne", value=best_year)
+
 with col3:
     st.metric(label="Pourcentage de lieux scrappés", value=str(pourcentage_scrappes) + "%")
-    st.metric(label="Année avec la pire note moyenne", value=worst_year)
+with col4:
+        st.metric(label="Note moyenne sur toutes les années", value=note_moyenne)
+
+data['pos'] = data['rate'].apply(lambda x:  x >= 2.5)
+#nb de revewies postives 
+nb_pos = data['pos'].sum()
+
+#nb de revewies negatives
+nb_neg = data['pos'].count() - nb_pos
+labels = ['Positives', 'Negatives']
+values = [nb_pos, nb_neg]
+fig_pos = go.Figure(data=[go.Pie(labels=labels, values=values,  hole=.5)])
+
+
+
+
 
 # Affichage du graphique
-fig = px.line(nb_reviews, x='years', y='nombre de reviews', text='note moyenne')
-fig.update_traces(
+line = px.line(nb_reviews, x='years', y='nombre de reviews', text='note moyenne')
+line.update_traces(
     hovertemplate='Année: %{x}<br>Nombre de reviews: %{y}<br>Note moyenne: %{text:.1f}')
-fig.update_traces(textposition='top center')
-fig.update_layout(xaxis={'type': 'category'})
-fig.update_layout(title={'text': 'Nombre de reviews et note moyenne par année', 'x': 0.5, 'xanchor': 'center'})
-st.plotly_chart(fig, use_container_width=True)
+line.update_traces(textposition='top center')
+line.update_layout(xaxis={'type': 'category'})
+line.update_layout(title={'text': 'Nombre de reviews et note moyenne par année', 'x': 0.5, 'xanchor': 'center'})
+
 
 # Affichage du DataFrame
 df_grouped = data.groupby('address').agg({'rate': [('average_rate', 'mean'), ('review_count', 'count')], 'latitude': 'first', 'longitude': 'first'}).reset_index()
 df_grouped.columns = ['address', 'average_rate', 'review_count', 'latitude', 'longitude']
 
 df_grouped['average_rate'] = df_grouped['average_rate'].round(1)
-
+df_grouped['average_rate'].astype(float)
 fig = go.Figure(go.Scattermapbox(
     lat=df_grouped['latitude'],
     lon=df_grouped['longitude'],
     mode='markers',
     marker=go.scattermapbox.Marker(
         size=10,
-        color='rgb(0, 0, 255)',
         opacity=0.7,
-        cmin=df_grouped['average_rate'].min(),
-        cmax=df_grouped['average_rate'].max(),
+
         colorbar=dict(
             title='Note moyenne'
         )
@@ -97,5 +109,12 @@ fig.update_layout(
     mapbox_center={'lat': df_grouped['latitude'].mean(), 'lon': df_grouped['longitude'].mean()},
     height=800
 )
+
 fig.update_traces(marker_color=df_grouped['average_rate'])
+
+cola, colb = st.columns(2)
+with cola:
+    st.plotly_chart(line, use_container_width=True)
+with colb:
+    st.plotly_chart(fig_pos, use_container_width=True)
 st.plotly_chart(fig, use_container_width=True)
