@@ -90,7 +90,7 @@ test_dataloader = DataLoader(
 )
 
 # On va stocker nos tensors sur le GPU s'il est disponible, sinon sur le CPU
-device = torch.device("mps")
+device = torch.device("cpu")
 # Création du modèle
 model = CamembertForSequenceClassification.from_pretrained("camembert-base")
 model.to(device)
