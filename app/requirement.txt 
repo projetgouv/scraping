@@ -35,7 +35,6 @@ fastjsonschema==2.16.3
 filelock==3.12.0
 fonttools==4.39.4
 fqdn==1.5.1
-fr-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/fr_core_news_sm-3.5.0/fr_core_news_sm-3.5.0-py3-none-any.whl#sha256=632607dab3a5253e5079e1b1a094cedc87185c2930e4405080d2e1810fbf9800
 fsspec==2023.5.0
 geographiclib==2.0
 geopy==2.3.0
