@@ -2,7 +2,7 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 import re
-st.set_theme('light')
+
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')

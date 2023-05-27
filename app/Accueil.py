@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 st.set_page_config(page_title='France Echanges', layout='wide')
-st.set_theme('light')
+
 
 # Titre
 st.markdown("<h1 style='text-align: center;'>France Échanges construisons ensemble France Emplois</h1>", unsafe_allow_html=True)
