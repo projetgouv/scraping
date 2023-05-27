@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from data_prep import DataProcessor, Classement
+st.set_theme('light')
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
