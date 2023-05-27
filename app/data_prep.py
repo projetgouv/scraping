@@ -68,33 +68,24 @@ class Classement:
     
     def load_location_data(self):
         self.loc = pd.read_csv(self.location_path, sep=';')
-        self.loc.rename(columns={'adresse': 'object_address'}, inplace=True)
-        self.loc['object_address'] = self.loc['object_address'].str.lower().str.strip()
-        self.data['object_address'] = self.data['object_address'].str.lower().str.strip()
+        self.loc.rename(columns={'adresse': 'address'}, inplace=True)
+        self.loc['address'] = self.loc['address'].str.lower().str.strip()
+        self.data['address'] = self.data['address'].str.lower().str.strip()
 
         # Remove comma
-        self.data['object_address'] = self.data['object_address'].str.replace(',', '')
+        self.data['address'] = self.data['address'].str.replace(',', '')
 
-        address_replacements = {
-            '11 rue pelée 75011 paris': '11 rue pelee 75011 paris',
-            '3 bd diderot 75012 paris': '3 boulevard diderot 75012 paris',
-            '75 av. jean jaurès 75019 paris': '75 avenue jean jaures 75019 paris',
-            '78 bd ney 75018 paris': '78 boulevard ney 75018 paris'
-        }
-        self.data['object_address'] = self.data['object_address'].replace(address_replacements)
-
-        address_to_lieu = self.loc.set_index('object_address')['name'].to_dict()
-        self.data['object_address'] = self.data['object_address'].map(address_to_lieu)
-        self.data.drop(self.data[self.data['object_address'] == 'ƒadam'].index, inplace=True)
+ 
+        self.data.drop(self.data[self.data['address'] == 'ƒadam'].index, inplace=True)
     
     def calculate_ranking(self):
-        df_lieu = self.data.groupby(['object_address']).agg(count_rate=('rate', 'count'), mean_rate=('rate', 'mean')).reset_index()
+        df_lieu = self.data.groupby(['address']).agg(count_rate=('rate', 'count'), mean_rate=('rate', 'mean')).reset_index()
         return df_lieu
 
     def max_rate(self):
-        max_rate = self.data.groupby('object_address')['rate'].mean().nlargest(1)
+        max_rate = self.data.groupby('address')['rate'].mean().nlargest(1)
         return max_rate
 
     def min_rate(self):
-        min_rate = self.data.groupby('object_address')['rate'].mean().nsmallest(1)
+        min_rate = self.data.groupby('address')['rate'].mean().nsmallest(1)
         return min_rate

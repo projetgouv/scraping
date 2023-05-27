@@ -8,11 +8,10 @@ from data_prep import DataProcessor
 # Configuration de la page Streamlit
 st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
 
-# Titre et description
-st.markdown("<h1 style='text-align: center;'>France Echanges</h1>", unsafe_allow_html=True)
-st.write("Bienvenue sur France Echanges, Ensemble, construisons le service public de l'emploi du futur en donnant la parole aux usagers")
-st.write("Nous avons rencontré quelques problèmes techniques, avec des données qui ne se sont pas chargées, vous trouvez ci-dessous une analyse des données qui ont pu être chargées")
-
+st.markdown("<h1 style='text-align: center;'>Analyse de la satisfaction des utilisateurs : panorama national</h1>", unsafe_allow_html=True)
+st.markdown("")
+st.info("Nous avons rencontré quelques problèmes techniques, avec des données qui ne se sont pas chargées, vous trouvez ci-dessous une analyse des données qui ont pu être chargées", icon='ℹ️')
+st.markdown("")
 # Chargement des données scrappées
 data_file = 'all_data/data_all.csv'
 df_scraped_data = pd.read_csv(data_file)
@@ -52,7 +51,7 @@ with col2:
 with col3:
     st.metric(label="Pourcentage de lieux scrappés", value=str(pourcentage_scrappes) + "%")
 with col4:
-        st.metric(label="Note moyenne sur toutes les années", value=note_moyenne)
+    st.metric(label="Note moyenne sur toutes les années", value=note_moyenne)
 
 data['pos'] = data['rate'].apply(lambda x:  x >= 2.5)
 #nb de revewies postives 
@@ -62,7 +61,7 @@ nb_pos = data['pos'].sum()
 nb_neg = data['pos'].count() - nb_pos
 labels = ['Positives', 'Negatives']
 values = [nb_pos, nb_neg]
-fig_pos = go.Figure(data=[go.Pie(labels=labels, values=values,  hole=.5)])
+fig_pos = go.Figure(data=[go.Pie(labels=labels, values=values,  hole=.5, marker=dict(colors=['#0049FF', '#ff0000']))]) 
 
 
 
