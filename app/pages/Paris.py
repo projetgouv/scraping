@@ -11,7 +11,7 @@ st.markdown("<h1 style='text-align: center;'>EDA sur les notes</h1>", unsafe_all
 st.write("Bienvenue sur France Echanges, Ensemble, construisons le service public de l'emploi du futur en donnant la parole aux usagers")
 
 # Load data
-data_path = '/Users/camille/repo/Hetic/projet_gouv/scraping/Data/google_reviews.csv'
+data_path = 'Data/google_reviews.csv'
 
 columns = ['date', 'rate', 'review_text', 'object_address']
 
@@ -19,7 +19,7 @@ processor = DataProcessor(data_path)
 processor.process_data(columns)
 data = processor.data
 #Load data2
-location_path = '/Users/camille/repo/Hetic/projet_gouv/scraping/Data/location.csv'
+location_path = 'Data/location.csv'
 # Vous pouvez accéder aux données transformées via l'attribut `data` de l'objet `proc ssor`
 
 
