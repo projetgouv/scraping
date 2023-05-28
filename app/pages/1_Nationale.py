@@ -11,8 +11,6 @@ st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wi
 
 st.markdown("<h1 style='text-align: center;'>Analyse de la satisfaction des utilisateurs : panorama national</h1>", unsafe_allow_html=True)
 st.markdown("")
-st.info("Nous avons rencontré quelques problèmes techniques, avec des données qui ne se sont pas chargées, vous trouvez ci-dessous une analyse des données qui ont pu être chargées", icon='ℹ️')
-st.markdown("")
 # Chargement des données scrappées
 data_file = 'all_data/data_all.csv'
 df_scraped_data = pd.read_csv(data_file)
@@ -117,4 +115,5 @@ with cola:
     st.plotly_chart(line, use_container_width=True)
 with colb:
     st.plotly_chart(fig_pos, use_container_width=True)
+st.markdown("<h4 style='text-align: center;'>Lieux scrapés (nombre d'avis et note moyenne)</h4>", unsafe_allow_html=True)
 st.plotly_chart(fig, use_container_width=True)

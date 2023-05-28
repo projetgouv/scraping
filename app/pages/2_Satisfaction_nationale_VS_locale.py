@@ -23,6 +23,7 @@ data['city'] = data['object_address'].apply(extract_city_from_address)
 
 # Interface Streamlit
 st.markdown("<h1 style='text-align: center;'>Comparaison de la satisfaction nationale et locale : avis positifs et négatifs</h1<", unsafe_allow_html=True)
+
 st.write("Choisir la localité dans le menu déroulant à droite pour comparer les avis positifs et négatifs de la localité avec la moyenne nationale.")
 selected_city = st.selectbox('Choisissez une ville', data['city'].unique())
 
