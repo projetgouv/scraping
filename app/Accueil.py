@@ -3,7 +3,7 @@ import pandas as pd
 st.set_page_config(page_title='France Echanges', layout='wide', initial_sidebar_state='collapsed')
 col1, col2 = st.columns([1, 8])
 col2.markdown("<h1 style='text-align: center;'>France Échanges construisons ensemble France Travail</h1>", unsafe_allow_html=True)
-col1.image('images/france-echange-low-resolution-color-logo.png', width=200)
+col1.image('images/france-echange-low-resolution-color-logo.png', width=250)
 st.markdown("<br>", unsafe_allow_html=True)
 st.error("Ce projet est réalisé dans le cadre d'un partenariat pégagogique entre Service Public + et HETIC. L'entité France Echanges est fictive et les données utilisées sont des données publiques.", icon='⛔️')
 st.warning("Nous avons rencontré quelques problèmes techniques, avec des données qui n'ont pas été intégralement extraites lors du scraping.", icon='ℹ️')
