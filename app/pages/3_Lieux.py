@@ -2,8 +2,13 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from data_prep import DataProcessor, Classement
-
+import spacy
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from nltk import ngrams
+from collections import Counter
+import matplotlib.pyplot as plt
+from data_prep import DataProcessor
 
 # Configuration de la page Streamlit
 st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
@@ -92,7 +97,6 @@ worst_place = data['object_address'][data['rate'].idxmin()]
 worst_rating = data['rate'].min().round(1)
 
 # Display the worst place and its rating
-st.write(f"Le lieu avec la note la plus basse est {worst_place} avec une note de {worst_rating}")
 
 
 # Display the metric values for other statistics
@@ -133,3 +137,43 @@ with col2:
 
     # Affichage du graphique pour la ville sélectionnée
     st.plotly_chart(fig_city, use_container_width=True)
+df_pos_reviews = pd.read_csv('Cleaning_eda/all_data_pos.csv')
+# on doit prendre en comptes la lieux selectionnés
+df_pos_reviews = df_pos_reviews[df_pos_reviews['object_address'] == selected_lieux]
+pos_reviews_terms = []
+df_pos_reviews['pos_reviews_terms'].apply(lambda x: pos_reviews_terms.extend(eval(x)))
+df_neg_reviews = pd.read_csv('Cleaning_eda/all_data_neg.csv')
+# on doit prendre en comptes la lieux selectionnés
+df_neg_reviews = df_neg_reviews[df_neg_reviews['object_address'] == selected_lieux]
+neg_reviews_terms = []
+df_neg_reviews['neg_reviews_terms'].apply(lambda x: neg_reviews_terms.extend(eval(x))).astype(str)
+occurrence_terms_neg = Counter(neg_reviews_terms)
+occurrence_terms_pos = Counter(pos_reviews_terms)
+
+
+wordcloud_neg = WordCloud(background_color="white", colormap= 'Reds').generate_from_frequencies(occurrence_terms_neg)
+wordcloud_pos = WordCloud(background_color="white", colormap= 'Blues_r').generate_from_frequencies(occurrence_terms_pos)
+
+fig_neg = plt.figure(figsize=(10, 6))
+plt.imshow(wordcloud_neg, interpolation='bilinear')
+plt.axis('off')
+
+plt.show()
+
+fig_pos = plt.figure(figsize=(10, 6))
+plt.imshow(wordcloud_pos, interpolation='bilinear')
+plt.axis('off')
+plt.show()
+
+with col1:
+    st.markdown("<h4 style='text-align: center;'>Nuage de mots des termes les plus fréquents dans les avis négatifs</h4>", unsafe_allow_html=True)
+    st.pyplot(fig_neg)
+with col2:
+    st.markdown("<h4 style='text-align: center;'>Nuage de mots des termes les plus fréquents dans les avis positifs</h4>", unsafe_allow_html=True)
+    st.pyplot(fig_pos)
+
+
+
+
+with st.expander("Méthodologie"):
+    st.write("")
