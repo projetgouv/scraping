@@ -2,6 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
+import spacy
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from nltk import ngrams
+from collections import Counter
+import matplotlib.pyplot as plt
+
+# Charger le modèle de langue français
 
 from data_prep import DataProcessor
 
@@ -116,4 +124,55 @@ with cola:
 with colb:
     st.plotly_chart(fig_pos, use_container_width=True)
 st.markdown("<h4 style='text-align: center;'>Lieux scrapés (nombre d'avis et note moyenne)</h4>", unsafe_allow_html=True)
+
+
+
+data_sentiment = pd.read_csv('Cleaning_eda/all_data.csv')
+
+neg_reviews = data_sentiment[data_sentiment['sentiment'] == 0]
+neg_reviews['cleaned_text'] = neg_reviews['cleaned_text'].astype(str)
+neg_reviews.dropna(inplace=True)
+
+pos_reviews = data_sentiment[data_sentiment['sentiment'] == 1]
+pos_reviews['cleaned_text'] = pos_reviews['cleaned_text'].astype(str)
+
+neg_reviews_text = ' '.join(neg_reviews['cleaned_text'])
+pos_reviews_text = ' '.join(pos_reviews['cleaned_text'])
+
+nlp = spacy.load("fr_core_news_sm")
+nlp.max_length = 2000000
+
+dependances_incluses = ['nsubj', 'xcomp', 'obl:mod', 'acl', 'conj', 'amod']
+stop_words = spacy.lang.fr.stop_words.STOP_WORDS
+
+# Lemmatisation des termes des avis négatifs
+neg_reviews_terms = neg_reviews['cleaned_text'].apply(lambda x: [token.lemma_ for token in nlp(x) if token.dep_ in dependances_incluses and token.text.lower() not in stop_words])
+occurrence_terms_neg = Counter([term for terms in neg_reviews_terms for term in terms])
+
+# Lemmatisation des termes des avis positifs
+pos_reviews_terms = pos_reviews['cleaned_text'].apply(lambda x: [token.lemma_ for token in nlp(x) if token.dep_ in dependances_incluses and token.text.lower() not in stop_words])
+occurrence_terms_pos = Counter([term for terms in pos_reviews_terms for term in terms])
+
+
+wordcloud_neg = WordCloud(background_color="white", colormap= 'Reds').generate_from_frequencies(occurrence_terms_neg)
+wordcloud_pos = WordCloud(background_color="white", colormap= 'Blues_r').generate_from_frequencies(occurrence_terms_pos)
+
+fig_neg = plt.figure(figsize=(10, 6))
+plt.imshow(wordcloud_neg, interpolation='bilinear')
+plt.axis('off')
+plt.title('Nuage de mots des termes les plus fréquents dans les avis négatifs')
+plt.show()
+
+fig_pos = plt.figure(figsize=(10, 6))
+plt.imshow(wordcloud_pos, interpolation='bilinear')
+plt.axis('off')
+plt.title('Nuage de mots des termes les plus fréquents dans les avis positifs')
+plt.show()
+
+
+with cola:
+    st.pyplot(fig_neg)
+with colb:
+    st.pyplot(fig_pos)
+
 st.plotly_chart(fig, use_container_width=True)
