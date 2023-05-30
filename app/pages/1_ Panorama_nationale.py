@@ -15,8 +15,7 @@ from data_prep import DataProcessor
 
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
-
+st.set_page_config(page_title='France Echanges', page_icon='🇫🇷', layout='wide')
 st.markdown("<h1 style='text-align: center;'>Analyse de la satisfaction des utilisateurs : panorama national</h1>", unsafe_allow_html=True)
 st.markdown("")
 # Chargement des données scrappées
@@ -162,3 +161,7 @@ st.plotly_chart(fig, use_container_width=True)
 
 with st.expander("Méthodologie"):
     st.write("")
+
+
+
+

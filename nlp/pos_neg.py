@@ -6,7 +6,7 @@ nlp = spacy.load("fr_core_news_sm")
 nlp.max_length = 2000000
 
 data_sentiment = pd.read_csv('Cleaning_eda/all_data.csv')
-nlp.max_length = 2000000
+
 
 dependances_incluses = ['nsubj', 'xcomp', 'obl:mod', 'acl', 'conj', 'amod']
 stop_words = spacy.lang.fr.stop_words.STOP_WORDS
