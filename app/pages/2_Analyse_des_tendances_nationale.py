@@ -12,11 +12,10 @@ st.write("Afin de mieux comprendre les avis des utilisateurs, nous avons analys�
         Les n-grams sont des séquences de n mots qui se suivent, où les bi-grams sont des séquences de deux mots, les tri-grams sont des séquences de trois mots, et ainsi de suite.\
         Cette analyse met en évidence les mots et expressions les plus fréquents dans les avis.")
 
-all_data = pd.read_csv('Cleaning_eda/all_data.csv')
+all_data = pd.read_csv('/Users/camille/repo/Hetic/projet_gouv/scraping/Cleaning_eda/all_data.csv')
 all_data = all_data.dropna(subset=['cleaned_text'])
 all_data = all_data.reset_index(drop=True)
 all_data['cleaned_text'] = all_data['cleaned_text'].astype(str)
-
 pos, neg = st.tabs(['Positive', 'Negative'])
 
 with pos:

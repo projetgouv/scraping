@@ -36,7 +36,7 @@ nombre_lieux = len(df_addresses['Adresse'].unique())
 pourcentage_scrappes = round((nombre_lieux_scrappes / nombre_lieux) * 100, 1)
 nb_reviews = data.groupby('years').agg({'rate': ['count', 'mean']}).reset_index()
 nb_reviews = nb_reviews[nb_reviews['years'] != 'NaT']
-nb_reviews.columns = ['years', 'nombre de reviews', 'note moyenne']
+nb_reviews.columns = ['years', 'nombre de avis', 'note moyenne']
 nb_reviews['note moyenne'] = round(nb_reviews['note moyenne'], 1)
 # Drop année non reconnue
 
@@ -50,12 +50,12 @@ worst_year = nb_reviews['years'][nb_reviews['note moyenne'].idxmin()]
 
 col1, col2, col3,col4= st.columns(4)
 with col1:
-    st.metric(label="Nombre de lieux scrappés", value=nombre_lieux_scrappes)
+    st.metric(label="Nombre de structures analysés", value=nombre_lieux_scrappes)
 with col2:
-    st.metric(label="Nombre d'avis scrappés", value=nb_reviews['nombre de reviews'].sum())
+    st.metric(label="Nombre d'avis analysés", value=nb_reviews['nombre de avis'].sum())
 
 with col3:
-    st.metric(label="Pourcentage de lieux scrappés", value=str(pourcentage_scrappes) + "%")
+    st.metric(label="Pourcentage de structures analysés", value=str(pourcentage_scrappes) + "%")
 with col4:
     st.metric(label="Note moyenne sur toutes les années", value=note_moyenne)
 
@@ -71,15 +71,12 @@ fig_pos = go.Figure(data=[go.Pie(labels=labels, values=values,  hole=.5, marker=
 
 
 
-
-
 # Affichage du graphique
-line = px.line(nb_reviews, x='years', y='nombre de reviews', text='note moyenne')
+line = px.line(nb_reviews, x='years', y='nombre de avis', text='note moyenne')
 line.update_traces(
-    hovertemplate='Année: %{x}<br>Nombre de reviews: %{y}<br>Note moyenne: %{text:.1f}')
+    hovertemplate='Année: %{x}<br>Nombre de avis: %{y}<br>Note moyenne: %{text:.1f}')
 line.update_traces(textposition='top center')
 line.update_layout(xaxis={'type': 'category'})
-line.update_layout(title={'text': 'Nombre de reviews et note moyenne par année', 'x': 0.5, 'xanchor': 'center'})
 
 
 # Affichage du DataFrame
@@ -119,12 +116,12 @@ fig.update_traces(marker_color=df_grouped['average_rate'])
 
 cola, colb = st.columns(2)
 with cola:
-    st.markdown("<h4 style='text-align: center;'>Nombre de reviews et note moyenne par année</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='text-align: center;'>Nombre de avis et note moyenne par année</h4>", unsafe_allow_html=True)
     st.plotly_chart(line, use_container_width=True)
 with colb:
     st.markdown("<h4 style='text-align: center;'>Répartions des avis postifs et négatifs</h4>", unsafe_allow_html=True)
     st.plotly_chart(fig_pos, use_container_width=True)
-st.markdown("<h4 style='text-align: center;'>Lieux scrapés (nombre d'avis et note moyenne)</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='text-align: center;'>Structures analysées (nombre d'avis et note moyenne)</h4>", unsafe_allow_html=True)
 df_pos_reviews = pd.read_csv('Cleaning_eda/all_data_pos.csv')
 pos_reviews_terms = []
 df_pos_reviews['pos_reviews_terms'].apply(lambda x: pos_reviews_terms.extend(eval(x)))
