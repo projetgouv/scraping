@@ -5,7 +5,7 @@ import re
 
 import streamlit as st
 
-st.set_page_config(page_title='France Echanges', layout='wide', initial_sidebar_state='collapsed')
+st.set_page_config(page_title='France Echange', layout='wide', initial_sidebar_state='collapsed')
 st.markdown("<h1 style='text-align: center;'>Analyse des tendances nationale</h1>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 st.write("Afin de mieux comprendre les avis des utilisateurs, nous avons analysé les tendances qui se dégagent des commentaires en utilisant les n-grams. \
