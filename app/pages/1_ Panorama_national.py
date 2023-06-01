@@ -2,10 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import spacy
 from wordcloud import WordCloud
-import matplotlib.pyplot as plt
-from nltk import ngrams
 from collections import Counter
 import matplotlib.pyplot as plt
 

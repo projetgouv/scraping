@@ -4,9 +4,8 @@ import plotly.express as px
 import plotly.graph_objects as go
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
-from nltk import ngrams
 from collections import Counter
-import matplotlib.pyplot as plt
+
 from data_prep import DataProcessor
 
 # Configuration de la page Streamlit
