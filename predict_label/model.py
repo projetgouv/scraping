@@ -60,9 +60,10 @@ predicted_df = pd.DataFrame(index=test.index)
 data_pe = pd.read_csv('Cleaning_eda/all_data.csv')
 data_pe = data_pe.dropna(subset=['cleaned_text'])
 # Preprocess the text data
-pos_text = data_pe['cleaned_text']
+pos_text = data_pe['cleaned_text'].astype(str)
 
-# Transform the positive text data
+
+
 x_pos = vectorizer.transform(pos_text)
 
 # Create a DataFrame to store the predicted values
@@ -81,6 +82,8 @@ for category in categories:
 
 # Concatenate the positive DataFrame (with original columns) and the predicted DataFrame
 result_pos_df = pd.concat([data_pe, df_pe], axis=1)
+#ajoute la colonne de l'adreesse
+result_pos_df['address'] = data_pe['object_address']
 # Save the result_pos_df as a csv file
 result_pos_df.to_csv('predict_label/result_pos_df.csv', index=False)
 

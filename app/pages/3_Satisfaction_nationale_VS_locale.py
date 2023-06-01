@@ -5,7 +5,7 @@ import re
 
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
+st.set_page_config(page_title='France Echange', page_icon=':house:', layout='wide')
 
 # Lecture des données à partir du fichier CSV
 data = pd.read_csv('all_data/google_reviews_RGPD.csv')

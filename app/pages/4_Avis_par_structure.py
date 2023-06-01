@@ -10,10 +10,10 @@ import matplotlib.pyplot as plt
 from data_prep import DataProcessor
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
+st.set_page_config(page_title='France Echange', page_icon=':house:', layout='wide')
 
 # Interface Streamlit
-st.markdown("<h1 style='text-align: center;'>Avis par lieux </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Avis par structre </h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>Choisissez un lieu afin de connaitre ses statistiques</h4>", unsafe_allow_html=True)
 
 data_path = 'all_data/google_reviews_RGPD.csv'
@@ -24,7 +24,7 @@ processor.process_data(columns)
 data = processor.data
 
 #Load data2
-data_path = 'all_data/google_reviews_RGPD.csv'
+data_path = 'predict_label/result_df.csv'
 
 # Vous pouvez accéder aux données transformées via l'attribut `data` de l'objet `processor`
 location_path = 'Data/location.csv'
@@ -173,6 +173,52 @@ with col2:
 
 
 
+df = pd.read_csv('predict_label/result_pos_df.csv')
+# on doit prendre en comptes la lieux selectionnés prcédemment
+df = df[df['object_address'] == selected_lieux]
+percentage_neg_info_predicted = round(df['neg_info_predicted'].sum() / len(df['neg_info_predicted']) * 100)
+percentage_pos_info_predicted = round(df['pos_info_predicted'].sum() / len(df['pos_info_predicted']) * 100)
+percentage_neutre_info_predicted = round(df['neutre_info_predicted'].sum() / len(df['neutre_info_predicted']) * 100)
+percentage_pos_access_predicted = round(df['pos_access_predicted'].sum() / len(df['pos_access_predicted']) * 100)
+percentage_neg_access_predicted = round(df['neg_access_predicted'].sum() / len(df['neg_access_predicted']) * 100)
+percentage_neutre_access_predicted = round(df['neutre_access_predicted'].sum() / len(df['neutre_access_predicted']) * 100)
 
-with st.expander("Méthodologie"):
-    st.write("")
+percentage_pos_relation_predicted = round(df['pos_relation_predicted'].sum() / len(df['pos_relation_predicted']) * 100)
+percentage_neg_relation_predicted = round(df['neg_relation_predicted'].sum() / len(df['neg_relation_predicted']) * 100)
+percentage_neutre_relation_predicted = round(df['neutre_relation_predicted'].sum() / len(df['neutre_relation_predicted']) * 100)
+
+percentage_pos_reactivite_predicted = round(df['pos_reactivite_predicted'].sum() / len(df['pos_reactivite_predicted']) * 100)
+percentage_neg_reactivite_predicted = round(df['neg_reactivite_predicted'].sum() / len(df['neg_reactivite_predicted']) * 100)
+percentage_neutre_reactivite_predicted = round(df['neutre_reactivite_predicted'].sum() / len(df['neutre_reactivite_predicted']) * 100)
+
+percentage_pos_simplicite_predicted = round(df['pos_simplicite_predicted'].sum() / len(df['pos_simplicite_predicted']) * 100)
+percentage_neg_simplicite_predicted = round(df['neg_simplicite_predicted'].sum() / len(df['neg_simplicite_predicted']) * 100)
+percentage_neutre_simplicite_predicted = round(df['neutre_simplicite_predicted'].sum() / len(df['neutre_simplicite_predicted']) * 100)
+
+col1, col2, col3, col4, col5, col6 = st.columns(6)
+
+with col1:
+    st.metric(label="Ressenti négatif sur l'info", value=f"{percentage_neg_info_predicted}%")
+    st.metric(label="Ressenti positif sur l'info", value=f"{percentage_pos_info_predicted}%")
+    st.metric(label="Ressenti neutre sur l'info", value=f"{percentage_neutre_info_predicted}%")
+
+with col2:
+    st.metric(label="Ressenti positif sur l'accès", value=f"{percentage_pos_access_predicted}%")
+    st.metric(label="Ressenti négatif sur l'accès", value=f"{percentage_neg_access_predicted}%")
+    st.metric(label="Ressenti neutre sur l'accès", value=f"{percentage_neutre_access_predicted}%")
+
+with col3:
+    st.metric(label="Ressenti positif sur la relation", value=f"{percentage_pos_relation_predicted}%")
+    st.metric(label="Ressenti négatif sur la relation", value=f"{percentage_neg_relation_predicted}%")
+    st.metric(label="Ressenti neutre sur la relation", value=f"{percentage_neutre_relation_predicted}%")
+
+with col4:
+    st.metric(label="Ressenti positif sur la réactivité", value=f"{percentage_pos_reactivite_predicted}%")
+    st.metric(label="Ressenti négatif sur la réactivité", value=f"{percentage_neg_reactivite_predicted}%")
+    st.metric(label="Ressenti neutre sur la réactivité", value=f"{percentage_neutre_reactivite_predicted}%")
+
+with col5:
+    st.metric(label="Ressenti positif sur la simplicité", value=f"{percentage_pos_simplicite_predicted}%")
+    st.metric(label="Ressenti négatif sur la simplicité", value=f"{percentage_neg_simplicite_predicted}%")
+    st.metric(label="Ressenti neutre sur la simplicité", value=f"{percentage_neutre_simplicite_predicted}%")
+
