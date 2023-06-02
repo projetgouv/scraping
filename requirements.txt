@@ -4,3 +4,5 @@ numpy
 matplotlib
 WordCloud
 plotly
+BERTopic
+sentence-transformers
