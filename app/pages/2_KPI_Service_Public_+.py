@@ -27,9 +27,9 @@ percentage_neutre_simplicite_predicted = round(df['neutre_simplicite_predicted']
 col1, col2, col3, col4, col5, col6 = st.columns(6)
 
 with col1:
-    st.metric(label="Ressenti négatif sur l'info", value=f"{percentage_neg_info_predicted}%")
-    st.metric(label="Ressenti positif sur l'info", value=f"{percentage_pos_info_predicted}%")
-    st.metric(label="Ressenti neutre sur l'info", value=f"{percentage_neutre_info_predicted}%")
+    st.metric(label="Ressenti négatif sur l'information/Explication	", value=f"{percentage_neg_info_predicted}%")
+    st.metric(label="Ressenti positif sur l'information/Explication	", value=f"{percentage_pos_info_predicted}%")
+    st.metric(label="Ressenti neutre sur l'information/Explication	", value=f"{percentage_neutre_info_predicted}%")
 
 with col2:
     st.metric(label="Ressenti positif sur l'accès", value=f"{percentage_pos_access_predicted}%")

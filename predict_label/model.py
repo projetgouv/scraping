@@ -37,7 +37,6 @@ y_test = test.drop(labels=['Description'], axis=1)
 categories = list(new_df.columns.values)
 categories = categories[:-1]
 
-# Using logistic regression with one-vs-rest approach
 LogReg_classifier = LogisticRegression(solver='sag', multi_class='ovr')
 
 # Iterate over categories and train logistic regression models
