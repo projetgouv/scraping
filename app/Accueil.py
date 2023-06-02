@@ -4,7 +4,7 @@ st.set_page_config(page_title='France Echange', layout='wide', initial_sidebar_s
 st.markdown("<h1 style='text-align: center;'>France Echange construisons ensemble le service publique de l'emploi</h1>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 st.error("Ce projet est réalisé dans le cadre d'un partenariat pégagogique entre Service Public + et HETIC. L'entité France Echange est fictive et les données utilisées sont des données publiques.", icon='⛔️')
-st.warning("Nous avons rencontré quelques problèmes techniques,la données n'est pas exhaustive.", icon='ℹ️')
+st.warning("Nous avons rencontré quelques problèmes techniques,la donnée n'est pas exhaustive.", icon='ℹ️')
 st.markdown("<br>", unsafe_allow_html=True)
 st.write("Dans la lignée du Service Public +, où l'innovation technologique et l'utilisation des données sont au cœur du progrès des insitutions, le projet novateur **France Echange** exploite les avis Google déposés sur les fiches Pôle Emploi. Grâce à des techniques de traitement automatique du langage naturel (NLP), nous analysons les commentaires des utilisateurs afin de comprendre leur verbatim, de mettre en évidence les reproches fréquents et d'identifier les aspects qui fonctionnent bien et ceux qui posent problème.")
 st.write("France Echange repose sur des techniques de traitement automatique du langage naturel (NLP) avancées, notamment l'analyse des sentiments et le topic modelling avec BERTopic. Grâce à ces outils, nous sommes en mesure d'analyser les commentaires des utilisateurs sur les fiches Pôle Emploi, ce qui nous permet de comprendre leur verbatim, de détecter les reproches fréquents, et d'identifier les aspects qui fonctionnent bien et ceux qui posent problème.")
