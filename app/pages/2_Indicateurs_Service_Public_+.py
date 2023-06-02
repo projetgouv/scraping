@@ -65,3 +65,86 @@ with col5:
     st.metric(label="Simplicité", value=f"{percentage_neg_simplicite_predicted}%")
     st.metric(label="Simplicité", value=f"{percentage_neutre_simplicite_predicted}%")
 
+
+with st.expander("Accuracy"):
+    code = """
+    Processing pos_info comments...
+Test accuracy for pos_info is 0.9135451240714398
+
+
+Processing neg_info comments...
+Test accuracy for neg_info is 0.7521732258574364
+
+
+Processing neutre_info comments...
+Test accuracy for neutre_info is 0.9878299351983563
+
+
+Processing unknown_info comments...
+Test accuracy for unknown_info is 0.6941678520625889
+
+
+Processing pos_access comments...
+Test accuracy for pos_access is 0.8637584953374428
+
+
+Processing neg_access comments...
+Test accuracy for neg_access is 0.7698751382961909
+
+
+Processing neutre_access comments...
+Test accuracy for neutre_access is 0.9811917180338233
+
+
+Processing unknown_access comments...
+Test accuracy for unknown_access is 0.7486960644855382
+
+
+Processing pos_relation comments...
+Test accuracy for pos_relation is 0.9227121858700806
+
+
+Processing neg_relation comments...
+Test accuracy for neg_relation is 0.9307728781412992
+
+
+Processing neutre_relation comments...
+Test accuracy for neutre_relation is 0.9951003635214162
+
+
+Processing unknown_relation comments...
+Test accuracy for unknown_relation is 0.8770349296665086
+
+
+Processing pos_reactivite comments...
+Test accuracy for pos_reactivite is 0.9359886201991465
+
+
+Processing neg_reactivite comments...
+Test accuracy for neg_reactivite is 0.8400505768926821
+
+
+Processing neutre_reactivite comments...
+Test accuracy for neutre_reactivite is 0.9952584163110479
+
+
+Processing unknown_reactivite comments...
+Test accuracy for unknown_reactivite is 0.7889995258416311
+
+
+Processing pos_simplicite comments...
+Test accuracy for pos_simplicite is 0.9173383910226015
+
+
+Processing neg_simplicite comments...
+Test accuracy for neg_simplicite is 0.6954322743796428
+
+
+Processing neutre_simplicite comments...
+Test accuracy for neutre_simplicite is 0.9876718824087245
+
+
+Processing unknown_simplicite comments...
+Test accuracy for unknown_simplicite is 0.6691955113007745
+    """
+    st.code(code, language='text')
