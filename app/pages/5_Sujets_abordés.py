@@ -9,7 +9,7 @@ data.dropna(subset=['review_text'], inplace=True)
 data.reset_index(drop=True, inplace=True)
 pos_data = data[data['sentiment'] ==1]
 neg_data = data[data['sentiment'] ==0]
-BERTopic(language="multilingual") 
+BERTopic(language="French") 
 sentence_model = SentenceTransformer("paraphrase-albert-small-v2")
 topic_model_pos = BERTopic(embedding_model=sentence_model, nr_topics=5)
 pos_data['cleaned_text'] = pos_data['cleaned_text'].astype(str)
