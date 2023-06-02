@@ -12,7 +12,7 @@ from data_prep import DataProcessor
 st.set_page_config(page_title='France Echange', page_icon=':house:', layout='wide')
 
 # Interface Streamlit
-st.markdown("<h1 style='text-align: center;'>Avis par structre </h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center;'>Avis par structure </h1>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center;'>Choisissez un lieu afin de connaitre ses statistiques</h4>", unsafe_allow_html=True)
 
 data_path = 'all_data/google_reviews_RGPD.csv'
@@ -193,31 +193,44 @@ percentage_neutre_reactivite_predicted = round(df['neutre_reactivite_predicted']
 percentage_pos_simplicite_predicted = round(df['pos_simplicite_predicted'].sum() / len(df['pos_simplicite_predicted']) * 100)
 percentage_neg_simplicite_predicted = round(df['neg_simplicite_predicted'].sum() / len(df['neg_simplicite_predicted']) * 100)
 percentage_neutre_simplicite_predicted = round(df['neutre_simplicite_predicted'].sum() / len(df['neutre_simplicite_predicted']) * 100)
+st.markdown("<h2 style='text-align: center;'>Indicateurs de performances</h2>", unsafe_allow_html=True)
 
-col1, col2, col3, col4, col5, col6 = st.columns(6)
+st.write("Nous utilisons les indicateurs de performance déja mise en place par le Service Publics +, afin d'apporter de la cohérence dans les outils de pilotage de la relation usagers. Ces indicateurs de performance sont :")
+st.markdown(" \
+        - Information/Explication \n \
+        - Accessibilité\n \
+        - Relation \n \
+        - Réactivité \n \
+        - Simplicité ")
 
+st.markdown("") 
+col0, col1, col2, col3, col4, col5= st.columns(6)
+with col0:
+    st. metric(label="", value=f"Négatif")
+    st. metric(label="", value=f"Positif")
+    st. metric(label="", value=f"Neutre")
 with col1:
-    st.metric(label="Ressenti négatif sur l'information/Explication	", value=f"{percentage_neg_info_predicted}%")
-    st.metric(label="Ressenti positif sur l'information/Explication	", value=f"{percentage_pos_info_predicted}%")
-    st.metric(label="Ressenti neutre sur l'information/Explication	", value=f"{percentage_neutre_info_predicted}%")
+    st.metric(label="Information/Explication", value=f"{percentage_neg_info_predicted}%")
+    st.metric(label=" Information/Explication", value=f"{percentage_pos_info_predicted}%")
+    st.metric(label="Information/Explication", value=f"{percentage_neutre_info_predicted}%")
 
 with col2:
-    st.metric(label="Ressenti positif sur l'accès", value=f"{percentage_pos_access_predicted}%")
-    st.metric(label="Ressenti négatif sur l'accès", value=f"{percentage_neg_access_predicted}%")
-    st.metric(label="Ressenti neutre sur l'accès", value=f"{percentage_neutre_access_predicted}%")
+    st.metric(label=" Accessibilité", value=f"{percentage_pos_access_predicted}%")
+    st.metric(label="Accessibilité", value=f"{percentage_neg_access_predicted}%")
+    st.metric(label="Accessibilité", value=f"{percentage_neutre_access_predicted}%")
 
 with col3:
-    st.metric(label="Ressenti positif sur la relation", value=f"{percentage_pos_relation_predicted}%")
-    st.metric(label="Ressenti négatif sur la relation", value=f"{percentage_neg_relation_predicted}%")
-    st.metric(label="Ressenti neutre sur la relation", value=f"{percentage_neutre_relation_predicted}%")
+    st.metric(label="Relation", value=f"{percentage_pos_relation_predicted}%")
+    st.metric(label="Relation", value=f"{percentage_neg_relation_predicted}%")
+    st.metric(label="Relation", value=f"{percentage_neutre_relation_predicted}%")
 
 with col4:
-    st.metric(label="Ressenti positif sur la réactivité", value=f"{percentage_pos_reactivite_predicted}%")
-    st.metric(label="Ressenti négatif sur la réactivité", value=f"{percentage_neg_reactivite_predicted}%")
-    st.metric(label="Ressenti neutre sur la réactivité", value=f"{percentage_neutre_reactivite_predicted}%")
+    st.metric(label="Réactivité", value=f"{percentage_pos_reactivite_predicted}%")
+    st.metric(label="Réactivité", value=f"{percentage_neg_reactivite_predicted}%")
+    st.metric(label="Réactivité", value=f"{percentage_neutre_reactivite_predicted}%")
 
 with col5:
-    st.metric(label="Ressenti positif sur la simplicité", value=f"{percentage_pos_simplicite_predicted}%")
-    st.metric(label="Ressenti négatif sur la simplicité", value=f"{percentage_neg_simplicite_predicted}%")
-    st.metric(label="Ressenti neutre sur la simplicité", value=f"{percentage_neutre_simplicite_predicted}%")
+    st.metric(label="Simplicité", value=f"{percentage_pos_simplicite_predicted}%")
+    st.metric(label="Simplicité", value=f"{percentage_neg_simplicite_predicted}%")
+    st.metric(label="Simplicité", value=f"{percentage_neutre_simplicite_predicted}%")
 
