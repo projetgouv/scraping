@@ -5,7 +5,7 @@ import re
 
 
 # Configuration de la page Streamlit
-st.set_page_config(page_title='France Echanges', page_icon=':house:', layout='wide')
+st.set_page_config(page_title='France Echange', page_icon=':house:', layout='wide')
 
 # Lecture des données à partir du fichier CSV
 data = pd.read_csv('all_data/google_reviews_RGPD.csv')
@@ -61,7 +61,6 @@ with col2:
     # Affichage du graphique pour la ville sélectionnée
     st.plotly_chart(fig, use_container_width=True)
 
-#Phrase pour la conclusion
 if nb_pos_city > nb_pos:
     st.write(f"La ville de {selected_city} a plus d'avis positifs que la moyenne nationale.")
 elif nb_pos_city < nb_pos:
