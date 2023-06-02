@@ -51,4 +51,3 @@ with col5:
     st.metric(label="Ressenti négatif sur la simplicité", value=f"{percentage_neg_simplicite_predicted}%")
     st.metric(label="Ressenti neutre sur la simplicité", value=f"{percentage_neutre_simplicite_predicted}%")
 
-st.dataframe(df)

@@ -61,7 +61,6 @@ with col2:
     # Affichage du graphique pour la ville sélectionnée
     st.plotly_chart(fig, use_container_width=True)
 
-#Phrase pour la conclusion
 if nb_pos_city > nb_pos:
     st.write(f"La ville de {selected_city} a plus d'avis positifs que la moyenne nationale.")
 elif nb_pos_city < nb_pos:
