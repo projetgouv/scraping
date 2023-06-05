@@ -152,6 +152,3 @@ with colb:
 
 st.plotly_chart(fig, use_container_width=True)
 
-
-with st.expander("Méthodologie"):
-    st.write("")
